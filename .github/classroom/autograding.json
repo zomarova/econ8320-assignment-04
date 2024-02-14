@@ -1,0 +1,64 @@
+{
+  "tests": [
+    {
+      "name": "Test 3x8 Matrix Creation",
+      "setup": "",
+      "run": "python -m unittest tests/test3x8.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 1
+    },
+    {
+      "name": "Test 3x8 Matrix Creation",
+      "setup": "",
+      "run": "python -m unittest tests/test10x10.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 1
+    },
+    {
+      "name": "Test 3x8 Matrix Size",
+      "setup": "",
+      "run": "python -m unittest tests/test3x8_size.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 1
+    },
+    {
+      "name": "Test 10x10 Matrix Size",
+      "setup": "",
+      "run": "python -m unittest tests/test10x10_size.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 3
+    },
+    {
+      "name": "Test Bad Input 1",
+      "setup": "",
+      "run": "python -m unittest tests/testBad1.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 3
+    },
+    {
+      "name": "Test Bad Input 2",
+      "setup": "",
+      "run": "python -m unittest tests/testBad2.py",
+      "input": "",
+      "output": "",
+      "comparison": "exact",
+      "timeout": 1,
+      "points": 3
+    }
+  ]
+}
