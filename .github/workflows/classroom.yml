@@ -1,25 +1,78 @@
-name: GitHub Classroom Workflow
-
-on:
-  - push
-  - workflow_dispatch
-
+name: Autograding Tests
+'on': {}
 permissions:
   checks: write
   actions: read
   contents: read
-
 jobs:
-  build:
-    name: Autograding
+  run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-      - run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - uses: education/autograding@v1
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Test 10x10
+      id: test-10x10
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test 10x10
+        setup-command: ''
+        command: python -m unittest test10x10.py
+        timeout: 1
+        max-score: 1
+    - name: Test 10x10 Size
+      id: test-10x10-size
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test 10x10 Size
+        setup-command: ''
+        command: python -m unittest test10x10_size.py
+        timeout: 1
+        max-score: 1
+    - name: Test 3x8
+      id: test-3x8
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test 3x8
+        setup-command: ''
+        command: python -m unittest test3x8.py
+        timeout: 1
+        max-score: 1
+    - name: Test 3x8 Size
+      id: test-3x8-size
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test 3x8 Size
+        setup-command: ''
+        command: python -m unittest test3x8_size.py
+        timeout: 1
+        max-score: 1
+    - name: Test Bad 1
+      id: test-bad-1
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Bad 1
+        setup-command: ''
+        command: python -m unittest testBad1.py
+        timeout: 1
+        max-score: 1
+    - name: Test Bad 2
+      id: test-bad-2
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: Test Bad 2
+        setup-command: ''
+        command: python -m unittest testBad2.py
+        timeout: 1
+        max-score: 1
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        TEST-10X10_RESULTS: "${{steps.test-10x10.outputs.result}}"
+        TEST-10X10-SIZE_RESULTS: "${{steps.test-10x10-size.outputs.result}}"
+        TEST-3X8_RESULTS: "${{steps.test-3x8.outputs.result}}"
+        TEST-3X8-SIZE_RESULTS: "${{steps.test-3x8-size.outputs.result}}"
+        TEST-BAD-1_RESULTS: "${{steps.test-bad-1.outputs.result}}"
+        TEST-BAD-2_RESULTS: "${{steps.test-bad-2.outputs.result}}"
+      with:
+        runners: test-10x10,test-10x10-size,test-3x8,test-3x8-size,test-bad-1,test-bad-2
